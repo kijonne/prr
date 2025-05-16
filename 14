@@ -1,0 +1,72 @@
+function factorial(n) {
+    if (n === 0 || n === 1) {
+        return 1;
+    } else {
+        return n * factorial(n - 1);
+    }
+}
+
+
+console.log(factorial(5)); // Выведет 120
+
+function decimalToN(num, base) {
+    if (base < 2 || base > 16) return "Некорректная система счисления";
+    
+    const digits = "0123456789ABCDEF";
+    let result = "";
+    
+    while (num > 0) {
+        result = digits[num % base] + result;
+        num = Math.floor(num / base);
+    }
+    
+    return result || "0";
+}
+
+console.log(decimalToN(255, 16)); 
+
+function countDigits(number) {
+    return number.toString().length;
+}
+
+function compareNumberLengths(a, b) {
+    const lenA = countDigits(a);
+    const lenB = countDigits(b);
+    
+    if (lenA > lenB) return "Первое число длиннее";
+    if (lenB > lenA) return "Второе число длиннее";
+    return "Числа имеют одинаковую длину";
+}
+
+
+console.log(compareNumberLengths(123, 4567)); 
+
+
+function isPalindrome(str) {
+    const cleanStr = str.toLowerCase().replace(/[^а-яa-z0-9]/g, '');
+    return cleanStr === cleanStr.split('').reverse().join('');
+}
+
+
+console.log(isPalindrome("А роза упала на лапу Азора"));
+
+
+
+function sumOfThreeDigits(num) {
+    return Math.floor(num / 100) + Math.floor((num % 100) / 10) + num % 10;
+}
+
+function findLuckyNumbers() {
+    const luckyNumbers = [];
+    for (let i = 100000; i <= 999999; i++) {
+        const firstPart = Math.floor(i / 1000);
+        const secondPart = i % 1000;
+        if (sumOfThreeDigits(firstPart) === sumOfThreeDigits(secondPart)) {
+            luckyNumbers.push(i);
+        }
+    }
+    return luckyNumbers;
+}
+
+
+console.log(findLuckyNumbers().slice(0, 10));
