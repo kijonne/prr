@@ -1,0 +1,53 @@
+function combineArrays(arr1, arr2) {
+    for (let item of arr2) {
+        arr1.push(item);
+    }
+    return arr1;
+}
+
+
+const array1 = [1, 2, 3];
+const array2 = [4, 5, 6];
+const combined = combineArrays(array1, array2);
+
+combined.forEach((item, index) => {
+    console.log(`Индекс ${index}: ${item}`);
+});
+
+
+
+function removeElements(arr, n) {
+    for (let i = 0; i < n; i++) {
+        if (arr.length > 0) {
+            arr.pop();
+        }
+    }
+    return arr;
+}
+
+const numbers = [1, 2, 3, 4, 5, 6];
+console.log(removeElements(numbers, 3).join(","));
+
+const numbers = [3, 1, 4, 1, 5, 9, 2, 6, 5];
+
+// Сортировка по возрастанию
+const ascending = [...numbers].sort((a, b) => a - b);
+console.log(ascending.join(",")); // Выведет "1,1,2,3,4,5,5,6,9"
+
+// Сортировка по убыванию
+const descending = [...numbers].sort((a, b) => b - a);
+console.log(descending.join(",")); // Выведет "9,6,5,5,4,3,2,1,1"
+
+
+const fruits = ['kiwi', 'apple', 'kiwi', 'orange', 'kiwi', 'apple'];
+
+function countItems(arr) {
+    const result = {};
+    arr.forEach(item => {
+        result[item] = (result[item] || 0) + 1;
+    });
+    return result;
+}
+
+// Пример использования
+console.log(countItems(fruits)); // Выведет {kiwi: 3, apple: 2, orange: 1}
