@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Практическая работа</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h2 {
+            color: #2c3e50;
+        }
+        p {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-left: 3px solid #3498db;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            margin: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .test {
+            background-color: #e8f4fc;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="section">
+        <h2 class="test">Заголовок страницы</h2>
+        <p id="firstParagraph">Первый абзац</p>
+        <p id="secondParagraph" class="test">Второй абзац</p>
+        
+        <h3>Базовые функции</h3>
+        <button id="hideAll">Скрыть все абзацы</button>
+        <button id="showParagraphs">Показать абзацы</button>
+        <button id="showAll">Показать все элементы</button>
+    </div>
+
+    <div class="section">
+        <h3>Дополнительные функции скрытия</h3>
+        <button class="hide-self">Скрыть кнопку</button>
+        <button id="hideFirst">Скрыть первый абзац</button>
+        <button id="hideSecond">Скрыть второй абзац</button>
+        <button id="hideTest">Скрыть элементы класса test</button>
+    </div>
+
+    <div class="section">
+        <h3>Анимация toggle</h3>
+        <p id="toggleText">Этот текст можно скрывать/показывать с анимацией</p>
+        <button id="fastToggle">Скрыть/показать быстро</button>
+        <button id="slowToggle">Скрыть/показать медленно</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
