@@ -1,0 +1,51 @@
+$(document).ready(function() {
+    // 5.1 - Скрыть все абзацы
+    $("#hideAll").click(function() {
+        $("p").hide();
+    });
+
+    // 5.2 - Дополнительные кнопки скрытия
+    $(".hide-self").click(function() {
+        $(this).hide();
+    });
+
+    $("#hideFirst").click(function() {
+        $("#firstParagraph").hide();
+    });
+
+    $("#hideSecond").click(function() {
+        $("#secondParagraph").hide();
+    });
+
+    $("#hideTest").click(function() {
+        $(".test").hide();
+    });
+
+    // 5.3 - Кнопки показа
+    $("#showParagraphs").click(function() {
+        $("p").show();
+    });
+
+    $("#showAll").click(function() {
+        $("body *").show();
+    });
+
+    // 5.4 - Анимация toggle
+    $("#fastToggle").click(function() {
+        $("#toggleText").toggle();
+    });
+
+    $("#slowToggle").click(function() {
+        $("#toggleText").toggle(1000);
+    });
+
+    // Дополнительно: Подсветка кнопок при наведении
+    $("button").hover(
+        function() {
+            $(this).css("opacity", "0.8");
+        },
+        function() {
+            $(this).css("opacity", "1");
+        }
+    );
+});х
