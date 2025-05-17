@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Задание 1</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Исходный заголовок</h1>
+    <button id="changeBtn">Изменить</button>
+    <p>Привет, мир!</p>
+
+    <script>
+        $(document).ready(function() {
+            $("#changeBtn").click(function() {
+                $("h1").text("jQuery — это просто!");
+                $("p").hide();
+            });
+        });
+    </script>
+</body>
+</html>
