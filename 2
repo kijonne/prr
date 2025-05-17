@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Задание 2</title>
+    <style>
+        .rounded {
+            border-radius: 50%;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <img src="image1.jpg" width="200" alt="Изображение">
+    <button id="changeImgBtn">Изменить изображение</button>
+
+    <script>
+        $(document).ready(function() {
+            $("#changeImgBtn").click(function() {
+                $("img").toggleClass("rounded");
+                $("img").attr("src", "image2.jpg");
+            });
+        });
+    </script>
+</body>
+</html>
