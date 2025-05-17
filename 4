@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Задание 4</title>
+    <style>
+        #animatedBlock {
+            width: 200px;
+            height: 100px;
+            background-color: #3498db;
+            margin: 20px;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div id="animatedBlock"></div>
+    <button id="hideBtn">Скрыть</button>
+    <button id="showBtn">Показать</button>
+    <button id="toggleBtn">Переключить</button>
+
+    <script>
+        $(document).ready(function() {
+            $("#hideBtn").click(function() {
+                $("#animatedBlock").fadeOut();
+            });
+            
+            $("#showBtn").click(function() {
+                $("#animatedBlock").fadeIn();
+            });
+            
+            $("#toggleBtn").click(function() {
+                $("#animatedBlock").slideToggle();
+            });
+        });
+    </script>
+</body>
+</html>
