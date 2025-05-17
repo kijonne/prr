@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Расписание занятий</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            border: 3px solid black;
+        }
+        caption {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+        thead th {
+            height: 30px;
+            background-color: #f2f2f2;
+        }
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <h4>4 Основное оборудование</h4>
+    <p>4.1 Персональный компьютер.</p>
+    
+    <h4>5 Задание</h4>
+    <div id="schedule-container"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.getElementById('schedule-container');
+            
+            // Создаем таблицу
+            const table = document.createElement('table');
+            
+            // Добавляем заголовок таблицы
+            const caption = document.createElement('caption');
+            caption.textContent = 'Расписание занятий';
+            table.appendChild(caption);
+            
+            // Создаем заголовок таблицы (thead)
+            const thead = document.createElement('thead');
+            const headerRow = document.createElement('tr');
+            
+            // Первая пустая ячейка
+            const emptyHeader = document.createElement('th');
+            headerRow.appendChild(emptyHeader);
+            
+            // Дни недели
+            const days = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+            days.forEach(day => {
+                const th = document.createElement('th');
+                th.textContent = day;
+                headerRow.appendChild(th);
+            });
+            
+            thead.appendChild(headerRow);
+            table.appendChild(thead);
+            
+            // Создаем тело таблицы (tbody)
+            const tbody = document.createElement('tbody');
+            
+            // Данные для расписания (пример)
+            const scheduleData = [
+                ['1', 'Математика', 'Физика', '', 'Химия', 'История', 'Литература'],
+                ['2', 'Физика', 'Информатика', 'Математика', '', 'Физкультура', ''],
+                ['3', '', 'Английский', 'Физика', 'Биология', '', 'География'],
+                ['4', 'Химия', '', 'Английский', 'Математика', 'Информатика', ''],
+                ['5', 'История', 'Литература', '', 'Физика', '', 'Биология']
+            ];
+            
+            // Заполняем таблицу данными
+            scheduleData.forEach(rowData => {
+                const row = document.createElement('tr');
+                
+                // Номер пары
+                const pairNumber = document.createElement('td');
+                pairNumber.textContent = rowData[0];
+                row.appendChild(pairNumber);
+                
+                // Предметы
+                for (let i = 1; i < rowData.length; i++) {
+                    const cell = document.createElement('td');
+                    cell.textContent = rowData[i];
+                    row.appendChild(cell);
+                }
+                
+                tbody.appendChild(row);
+            });
+            
+            table.appendChild(tbody);
+            
+            // Объединяем пустые ячейки в столбцах
+            mergeEmptyCells(table);
+            
+            // Добавляем таблицу в контейнер
+            container.appendChild(table);
+            
+            // Функция для объединения пустых ячеек в столбцах
+            function mergeEmptyCells(table) {
+                const rows = table.querySelectorAll('tbody tr');
+                const cols = rows[0].cells.length;
+                
+                for (let col = 1; col < cols; col++) {
+                    let startRow = null;
+                    
+                    for (let row = 0; row < rows.length; row++) {
+                        const cell = rows[row].cells[col];
+                        
+                        if (cell.textContent.trim() === '') {
+                            if (startRow === null) {
+                                startRow = row;
+                            }
+                        } else {
+                            if (startRow !== null && row - startRow > 1) {
+                                const span = row - startRow;
+                                rows[startRow].cells[col].rowSpan = span;
+                                
+                                // Скрываем объединенные ячейки
+                                for (let i = startRow + 1; i < row; i++) {
+                                    rows[i].cells[col].style.display = 'none';
+                                }
+                            }
+                            startRow = null;
+                        }
+                    }
+                    
+                    // Проверяем ячейки в конце столбца
+                    if (startRow !== null && rows.length - startRow > 1) {
+                        const span = rows.length - startRow;
+                        rows[startRow].cells[col].rowSpan = span;
+                        
+                        for (let i = startRow + 1; i < rows.length; i++) {
+                            rows[i].cells[col].style.display = 'none';
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
