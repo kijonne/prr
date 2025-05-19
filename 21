@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Множество шаров</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+            display: block;
+            margin: 20px auto;
+        }
+        .controls {
+            text-align: center;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Движение множества шаров</h1>
+    <div class="controls">
+        <label for="ballCount">Количество шаров:</label>
+        <input type="number" id="ballCount" min="1" max="50" value="5">
+        <button id="startBtn">Запустить</button>
+    </div>
+    <canvas id="myCanvas" width="600" height="400"></canvas>
+
+    <script>
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+        var balls = [];
+        var animationId;
+        
+        function createBall() {
+            var radius = 15 + Math.random() * 10;
+            return {
+                x: radius + Math.random() * (canvas.width - 2 * radius),
+                y: radius + Math.random() * (canvas.height - 2 * radius),
+                radius: radius,
+                dx: (Math.random() * 4 + 1) * (Math.random() > 0.5 ? 1 : -1),
+                dy: (Math.random() * 4 + 1) * (Math.random() > 0.5 ? 1 : -1),
+                color: getRandomColor()
+            };
+        }
+        
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+        
+        function drawBalls() {
+            // Очищаем canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Рисуем все шары
+            for (var i = 0; i < balls.length; i++) {
+                var ball = balls[i];
+                
+                ctx.beginPath();
+                ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+                ctx.fillStyle = ball.color;
+                ctx.fill();
+                ctx.closePath();
+                
+                // Перемещаем шар
+                ball.x += ball.dx;
+                ball.y += ball.dy;
+                
+                // Проверяем столкновения со стенами
+                if (ball.x + ball.radius > canvas.width || ball.x - ball.radius < 0) {
+                    ball.dx = -ball.dx;
+                }
+                
+                if (ball.y + ball.radius > canvas.height || ball.y - ball.radius < 0) {
+                    ball.dy = -ball.dy;
+                }
+            }
+            
+            animationId = requestAnimationFrame(drawBalls);
+        }
+        
+        document.getElementById("startBtn").addEventListener("click", function() {
+            // Останавливаем предыдущую анимацию, если она была
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+            }
+            
+            // Создаем новые шары
+            balls = [];
+            var count = parseInt(document.getElementById("ballCount").value);
+            
+            for (var i = 0; i < count; i++) {
+                balls.push(createBall());
+            }
+            
+            // Запускаем анимацию
+            drawBalls();
+        });
+    </script>
+</body>
+</html>
